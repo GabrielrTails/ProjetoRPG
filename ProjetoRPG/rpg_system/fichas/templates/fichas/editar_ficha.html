@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Editar Ficha</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Formulário de edição da ficha base -->
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary w-100">Salvar Alterações</button>
+            </form>
+            
+            <!-- Botão para cancelar e voltar à lista de fichas -->
+            <a href="{% url 'lista_fichas' %}" class="btn btn-secondary mt-3 w-100">Cancelar</a>
+            
+            <!-- Condição para exibir o botão de edição da ficha de combate -->
+            {% if ficha.ficha_combate %}
+                <a href="{% url 'visualizar_ficha_combate' ficha.ficha_combate.id %}" class="btn btn-warning mt-3 w-100">Editar Ficha de Combate</a>
+            {% else %}
+                <span class="text-muted mt-3 w-100 d-block">Nenhuma ficha de combate vinculada</span>
+            {% endif %}
+            
+            <!-- Botão para excluir a ficha base -->
+            <form method="post" action="{% url 'deletar_ficha' ficha.id %}" class="mt-3">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger w-100">Excluir Ficha</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

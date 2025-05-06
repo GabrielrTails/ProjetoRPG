@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Bem-vindo ao Sistema de Fichas de RPG!</h1>
+    {% if user.is_authenticated %}
+        <p>Bem-vindo de volta, {{ user.username }}!</p>
+        <p>Gerencie suas fichas <a href="{% url 'lista_fichas' %}">aqui</a>.</p>
+    {% else %}
+        <p>Para utilizar as fichas, <a href="{% url 'usuarios:login' %}">faça login</a> ou <a href="{% url 'usuarios:registro' %}">registre-se</a>.</p>
+    {% endif %}
+{% endblock %}

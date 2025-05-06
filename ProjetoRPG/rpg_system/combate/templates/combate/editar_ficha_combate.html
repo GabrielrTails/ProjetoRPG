@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if ficha.ficha_combate %}
+    <a href="{% url 'visualizar_ficha_combate' ficha.ficha_combate.id %}" class="btn btn-warning mt-3 w-100">Visualizar Ficha de Combate</a>
+    <a href="{% url 'editar_ficha_combate' ficha.ficha_combate.id %}" class="btn btn-info mt-3 w-100">Editar Ficha de Combate</a>
+{% else %}
+    <span class="text-muted">Nenhuma ficha de combate vinculada</span>
+{% endif %}
+<div class="container mt-5">
+    <h1 class="text-center">Editar Ficha de Combate</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary w-100">Salvar Alterações</button>
+            </form>
+            <a href="{% url 'visualizar_ficha_combate' ficha_combate.id %}" class="btn btn-secondary mt-3 w-100">Voltar para Visualização</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

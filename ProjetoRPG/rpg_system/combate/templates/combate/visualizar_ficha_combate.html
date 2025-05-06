@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Ficha de Combate: {{ ficha_combate.ficha.nome_personagem }}</h1>
+    <p><strong>Vida:</strong> {{ ficha_combate.vida }}</p>
+    <p><strong>Mana:</strong> {{ ficha_combate.mana }}</p>
+    <p><strong>Atributos:</strong> {{ ficha_combate.atributos }}</p>
+    <p><strong>Barras Personalizáveis:</strong> {{ ficha_combate.barras_personalizaveis }}</p>
+    <p><strong>Anotações:</strong> {{ ficha_combate.anotacoes }}</p>
+</div>
+{% endblock %}

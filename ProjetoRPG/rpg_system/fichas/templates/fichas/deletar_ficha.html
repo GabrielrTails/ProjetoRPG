@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center text-danger">Excluir Ficha</h1>
+    <div class="alert alert-warning text-center">
+        <p>Tem certeza de que deseja excluir a ficha <strong>{{ ficha.nome_personagem }}</strong> do sistema <strong>{{ ficha.sistema }}</strong>? Esta ação não pode ser desfeita.</p>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger w-100">Confirmar Exclusão</button>
+    </form>
+    <a href="{% url 'lista_fichas' %}" class="btn btn-secondary mt-3 w-100">Cancelar</a>
+</div>
+{% endblock %}

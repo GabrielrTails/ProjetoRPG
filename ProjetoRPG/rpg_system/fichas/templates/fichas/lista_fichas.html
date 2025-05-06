@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Minhas Fichas</h1>
+    <a href="{% url 'criar_ficha' %}" class="btn btn-primary mb-3">Criar Nova Ficha</a> <!-- Botão sempre visível -->
+
+    {% if fichas %}
+        <ul class="list-group">
+            {% for ficha in fichas %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>
+                        <strong>{{ ficha.nome_personagem }}</strong> - {{ ficha.sistema }}
+                    </span>
+                    <div>
+                        <!-- Botão para editar a ficha base -->
+                        <a href="{% url 'editar_ficha' ficha.id %}" class="btn btn-sm btn-secondary">Editar Ficha Base</a>
+
+                        <!-- Condição para exibir o botão da ficha de combate -->
+                        {% if ficha.ficha_combate %}
+                            <a href="{% url 'visualizar_ficha_combate' ficha.ficha_combate.id %}" class="btn btn-sm btn-warning">Ficha de Combate</a>
+                            <a href="{% url 'editar_ficha_combate' ficha.ficha_combate.id %}" class="btn btn-sm btn-info">Editar Ficha de Combate</a>
+                        {% else %}
+                            <span class="text-muted">Nenhuma ficha de combate vinculada</span>
+                        {% endif %}
+
+                        <!-- Botão para excluir a ficha base -->
+                        <form method="post" action="{% url 'deletar_ficha' ficha.id %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-danger">Excluir Ficha Base</button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="alert alert-warning text-center">
+            <p>Você ainda não possui fichas cadastradas.</p>
+        </div>
+    {% endif %}
+{% endblock %}
